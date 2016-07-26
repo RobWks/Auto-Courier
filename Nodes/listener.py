@@ -3,10 +3,34 @@ import rospy
 from std_msgs.msg import String
 from nav_msgs.msg import OccupancyGrid
 import numpy as np
+import matplotlib.pyplot as plt
 
 def map_callback(data):
     e5_map = data.data
     np.savetxt('test.csv', e5_map, delimiter=',') 
+    e5_map = np.reshape(e5_map/100,[384,1125])
+    e5_map = e5_map.astype(bool)
+    [M,N]= e5_map.shape
+    plt.imshow(e5_map)
+    plt.show()
+
+    num_obstacles = 5000;
+    x_o = np.round(np.random.rand(1,num_obstacles)*(N-1))+1
+    y_o = np.round(np.random.rand(1,num_obstacles)*(M-1))+1
+
+
+    ind_delete = []
+    for i in range(len(x_o[0]))[::-1]:
+        if e5_map[y_o[0][i]][x_o[0][i]]:
+            ind_delete.append(i)
+
+    x_o = np.delete(x_o,ind_delete)
+    y_o = np.delete(y_o,ind_delete)
+    plt.plot(x_o,y_o,'*')
+    plt.axis('equal')
+    plt.axis([0,384,0,1125])
+    plt.show()
+
 
     
 def listener():
