@@ -29,10 +29,10 @@ window
 
 floorplan
 (
-  name "tutorial"
-  bitmap "tutorial.png"
-  size [ 10.0 10.0 2.0 ]
-  pose [  5.0  5.0 0.0 0.0 ]
+  name "e5"
+  bitmap "e5.png"
+  size [ 85.173501577 29.072555205 2.0 ]
+  pose [  42.586750789  14.536277603 0.0 0.0 ]
 )
 
 # throw in a robot
