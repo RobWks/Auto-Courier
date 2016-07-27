@@ -14,7 +14,7 @@ def main():
 
     plt.imshow(e5_map)
 
-    num_obstacles = 20000;
+    num_obstacles = 2000;
     x_o = np.round(np.random.rand(1,num_obstacles)*(N-1))
     y_o = np.round(np.random.rand(1,num_obstacles)*(M-1))
 
@@ -32,7 +32,7 @@ def main():
     y_o = y_o.reshape(len(y_o),1)
 
     points = np.concatenate((x_o,y_o),axis=1)
-
+    print points.shape
     print '1'
 
     dist_from_points = np.zeros((len(points),len(points)))
@@ -47,7 +47,7 @@ def main():
 
 
 
-    numb_close = 5; #Number of closest points that you want to connect
+    numb_close = 30; #Number of closest points that you want to connect
     neighbors = np.zeros((numb_close+1,len(dist_from_points)))
     index_tool = range(len(dist_from_points))
 
@@ -70,8 +70,6 @@ def main():
 
     count = 0;
     for pair in matches:
-        count = count +1
-        print count
         if not check_line_collision(pair,0.4,e5_map):
             plt.plot([pair[0][0],pair[1][0]],[pair[0][1],pair[1][1]],'g')
         #else:
